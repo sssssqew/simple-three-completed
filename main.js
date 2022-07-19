@@ -211,17 +211,3 @@ setCubCamera()
 
 animate() // 애니메이션 시작 
 window.addEventListener('resize', onWindowResize); // 화면 반응형 적용
-
-
-
-
-
-
-
-
-
-
-
-
-
-
