@@ -12,15 +12,24 @@ module.exports = {
     devtool: "source-map",
     devServer: { // 웹팩 개발서버 설정
         static: {
-            directory: path.join(__dirname, "dist") // 빌드시 dist 폴더의 코드를 읽어서 서브함
+            // directory: path.join(__dirname, "dist") // 빌드시 dist 폴더의 코드를 읽어서 서브함
+            directory: path.join(__dirname) // 개발모드
           },
           port: 3000, // 개발서버 포트 설정
           compress: true, // 코드 압축여부 설정
     },
     output : { 
         path : path.resolve(__dirname, "dist"), // 빌드후 코드가 저장될 폴더 설정 
-        filename : 'main.js' // 빌드후 자바스크립트 파일 이름 설정
+        filename : 'main.js', // 빌드후 자바스크립트 파일 이름 설정
+        environment: {
+            module: true,
+            dynamicImport: true,   // 외부 CDN 라이브러리 임포트
+        },
     },
+    externalsType: "import",
+    // externals: {
+    //     home: "http://dreamplan7.cafe24.com/canvas/img/home.dae" // 외부 라이브러리 임포트
+    // },
     // 빌드된 파일의 크기가 512000 이상이면 경고 메시지 출력
     performance: {
         hints: false,
@@ -39,7 +48,7 @@ module.exports = {
                 use : ["style-loader", "css-loader"]
             },
             {
-                test: /\.(jpg|jpeg|gif|png|svg|ico|fbx)?$/, // 이미지 파일 설정
+                test: /\.(jpg|jpe?g|gif|png|svg|ico|fbx)?$/, // 이미지 파일 설정
                 loader: 'file-loader',
                 options: {
                     limit: 10000,
@@ -53,7 +62,8 @@ module.exports = {
                     limit: 10000,
                     name: '[name].[ext]', // 빌드시 파일 이름에 해쉬없이 원본이름 그대로 설정
                 },
-            }
+            },
+            { test: /\.(xml|dae)$/, loader: 'xml-loader' } // will load all .xml files with xml-loader by default
         ],
     },
     plugins: [
