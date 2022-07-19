@@ -8,6 +8,10 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 // import { Water } from 'http://dreamplan7.cafe24.com/canvas2/js/Water.js'
 // import { Sky } from 'three/examples/jsm/objects/Sky.js';
 
+import * as THREE from './three'
+import './Sky'
+import './Water'
+
 import expo from './img/expo.jpg'
 import back from './img/back.png'
 import logo from './fbx/test.fbx'
